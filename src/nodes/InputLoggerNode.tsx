@@ -31,7 +31,6 @@ export function InputLoggerNode({
       {data.label && <div>{data.label}</div>}
 
       <div>{incomers.map((incomingNode) => incomingNode.id + ", ")}</div>
-      <div>test</div>
 
       <Handle type="source" position={Position.Bottom} />
     </div>
