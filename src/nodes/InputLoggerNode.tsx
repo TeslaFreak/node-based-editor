@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import type { Node, NodeProps } from "reactflow";
+import type { NodeProps } from "reactflow";
 import { Handle, Position, getIncomers, useEdges, useNodes } from "reactflow";
 
 export type PositionLoggerNodeData = {
