@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import type { NodeProps } from "reactflow";
+import type { Node, NodeProps } from "reactflow";
 import { Handle, Position, getIncomers, useEdges, useNodes } from "reactflow";
 
 export type PositionLoggerNodeData = {
@@ -12,12 +12,12 @@ export function InputLoggerNode({
   yPos,
   data,
 }: NodeProps<PositionLoggerNodeData>) {
-  const nodes = useNodes();
+  const nodes = useNodes<PositionLoggerNodeData>();
   const edges = useEdges();
   // const ReactFlowInstance = useReactFlow()
 
   const incomers = useMemo(() => {
-    return getIncomers(
+    return getIncomers<PositionLoggerNodeData>(
       { id: id, position: { x: xPos, y: yPos }, data: data },
       nodes,
       edges
@@ -30,7 +30,11 @@ export function InputLoggerNode({
       <Handle type="target" position={Position.Top} />
       {data.label && <div>{data.label}</div>}
 
-      <div>{incomers.map((incomingNode) => incomingNode.id + ", ")}</div>
+      <div>
+        {incomers.map((incomingNode) => (
+          <div key={incomingNode.id}>{incomingNode.data?.label + ", "}</div>
+        ))}
+      </div>
 
       <Handle type="source" position={Position.Bottom} />
     </div>
